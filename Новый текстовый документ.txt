@@ -1,0 +1,86 @@
+import pygame 
+pygame.init()
+
+RED = (255, 0, 0)
+GREEN = (0, 255, 51)
+BlUE = (0, 0, 255)
+ORANGE = (255, 123, 0)
+WHITE = (255, 255, 255)
+YELLOW = (255, 255, 0)
+LIGHT_GREEN = (200, 255, 200)
+LIGHT_RED = (250, 128, 114)
+BLACK = (0, 0, 0)
+DARK_BLUE = (0, 0, 100)
+LIGHT_BLUE = (80, 80, 255)
+mw = pygame.display.set_mode((500, 500))
+mw.fill(LIGHT_BLUE)
+clock = pygame.time.Clock()
+
+class Area():
+    def __init__(self, x = 0,y= 0, width = 10, height = 10, color=YELLOW):
+        self.rect = pygame.Rect(x,y,width,height)
+        self.fill_color = color
+    def color(self, new_color):
+        self.fill_color =new_color
+    def fill(self):
+        pygame.draw.rect(mw, self.fill_color,self.rect)
+    def outline(self, frame_color,thickness):
+        pygame.draw.rect(mw, frame_color,self.rect,thickness)
+
+class Label(Area):
+    def set_text(self, text, fsize = 12, text_color = (0, 0, 0)):
+        self.image = pygame.font.SysFont('verdana', fsize).render(text, True, text_color)
+    def draw(self, shift_x = 0, shift_y = 0 ):
+        self.fill()
+        mw.blit(self.image, (self.rect.x + shift_x, self.rect.y + shift_y))
+
+text = Label()
+
+cards = []
+num_card=4
+x= 50
+for i in range(num_card):
+    new_card=Label(x,200,70,120)
+    new_card.set_text('CLICK',30)
+    cards.append(new_card)
+    
+    x=x+120
+
+
+while True:
+    for i in range(num_card):
+        cards[i].fill()
+        cards[i].outline(LIGHT_RED,10)
+        cards[i].draw(5,35)
+    
+
+
+
+
+
+    pygame.display.update()
+    clock.tick(40)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
